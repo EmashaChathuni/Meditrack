@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 
 import authRoutes from './routes/auth.routes.js';
+import recordRoutes from './routes/records.routes.js';
 
 const app = express();
 
@@ -15,7 +16,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: process.env.CLIENT_ORIGIN?.split(',') || ['http://localhost:5173', 'http://localhost:3000'],
+    origin: process.env.CLIENT_ORIGIN?.split(',') || [ 'http://localhost:3000'],
     credentials: true,  // Allow cookies to be sent with requests
   })
 );
@@ -24,6 +25,7 @@ app.use(
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
 app.use('/api/auth', authRoutes);
+app.use('/api/records', recordRoutes);
 
 // Global error handler
 app.use((err, req, res, next) => {

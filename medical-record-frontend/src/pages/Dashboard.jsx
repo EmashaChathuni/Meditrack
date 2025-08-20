@@ -63,25 +63,47 @@ function normalizeRecord(rec) {
 }
 
 /** Build payload for our simple backend (title/description/date/tags) */
-function toBackendPayload(edit) {
-  const meds =
-    edit.medications
-      ?.split(",")
-      .map((s) => s.trim())
-      .filter(Boolean) ?? [];
-  const metaTags = [
-    edit.doctor ? `doctor:${edit.doctor}` : null,
-    edit.hospital ? `hospital:${edit.hospital}` : null,
-    edit.followUpDate ? `followUp:${edit.followUpDate}` : null,
-  ].filter(Boolean);
+// function toBackendPayload(edit) {
+//   const meds =
+//     edit.medications
+//       ?.split(",")
+//       .map((s) => s.trim())
+//       .filter(Boolean) ?? [];
+//   const metaTags = [
+//     edit.doctor ? `doctor:${edit.doctor}` : null,
+//     edit.hospital ? `hospital:${edit.hospital}` : null,
+//     edit.followUpDate ? `followUp:${edit.followUpDate}` : null,
+//   ].filter(Boolean);
+
+//   return {
+//     title: edit.diagnosis ?? edit.title ?? "",
+//     description: edit.notes ?? edit.description ?? "",
+//     date: edit.date || undefined,
+     
+//      tags: [...meds, ...metaTags],
+//   };
+// }
+function toBackendPayload(record) {
+  const meds = record.medications
+    ?.split(",")
+    .map((s) => s.trim())
+    .filter(Boolean) ?? [];
 
   return {
-    title: edit.diagnosis ?? edit.title ?? "",
-    description: edit.notes ?? edit.description ?? "",
-    date: edit.date || undefined,
-    tags: [...meds, ...metaTags],
+    date: new Date(record.date).toISOString(),
+    diagnosis: record.diagnosis ?? "",
+    medications: meds.join(", "),
+    doctor: record.doctor ?? "",
+    hospital: record.hospital ?? "",
+    followUpDate: record.followUpDate ? new Date(record.followUpDate).toISOString() : null,
+    notes: record.notes ?? "",
   };
 }
+
+
+
+
+
 
 /** Normalize Lab Report shape */
 function normalizeLabReport(doc) {
@@ -305,7 +327,12 @@ function Dashboard() {
   };
 
   const handleCreateRecord = async () => {
-    const payload = toBackendPayload(newRecord);
+    const payload = {...toBackendPayload(newRecord), date: new Date(newRecord.date).toISOString() };
+    
+console.log("Sending payload:", payload);
+
+     
+      
     try {
       let created;
       try {
@@ -319,6 +346,7 @@ function Dashboard() {
           ...payload,
         });
       }
+
       setMedicalRecords((prev) => [created, ...prev]);
       setAddRecordOpen(false);
       setNewRecord({
