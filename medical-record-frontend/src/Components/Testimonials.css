@@ -1,0 +1,171 @@
+/* Container + background */
+.testimonials-section {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  padding: 80px 20px 100px;
+  isolation: isolate;
+
+  /* soft blue gradient base */
+  background: linear-gradient(135deg, #4f8ff7 0%, #68aafc 50%, #6fc2ff 100%);
+}
+
+/* Optional background figure/image overlay (blur + low opacity) */
+.testimonials-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: var(--bg-url, none);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.18;           /* faint image */
+  filter: blur(4px);       /* subtle blur so text remains readable */
+  transform: scale(1.05);  /* reduce edge artifact when blurring */
+}
+
+/* inner width constraints */
+.tsn-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Headings */
+.tsn-subtitle {
+  text-align: center;
+  letter-spacing: 2px;
+  font-weight: 700;
+  font-size: 14px;
+  opacity: 0.85;
+  margin: 0 0 8px 0;
+  text-transform: uppercase;
+}
+
+.tsn-title {
+  text-align: center;
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: 1.1;
+  margin: 0 0 40px 0;
+  font-weight: 800;
+}
+
+/* Grid */
+.tsn-grid {
+  display: grid;
+  gap: 40px;
+  align-items: start;
+  justify-content: center;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 991px) {
+  .tsn-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 639px) {
+  .tsn-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Card */
+.tsn-card {
+  text-align: center;
+  padding: 20px 24px 16px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 10px 30px rgba(5, 33, 80, 0.25);
+  backdrop-filter: blur(2px);
+  transition: transform 220ms ease, background 220ms ease;
+}
+
+.tsn-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.09);
+}
+
+/* Avatar + quote badge */
+.tsn-avatar-wrap {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 18px;
+}
+
+.tsn-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 999px;
+  object-fit: cover;
+  display: block;
+  border: 6px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 20px rgba(5, 33, 80, 0.35);
+}
+
+.tsn-quote {
+  position: absolute;
+  right: -2px;
+  bottom: 6px;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #ff6542; /* warm accent like screenshot */
+  color: #fff;
+  border: 3px solid #ffffff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Text */
+.tsn-text {
+  font-size: 16px;
+  line-height: 1.9;
+  opacity: 0.95;
+  margin: 0 auto 18px;
+  max-width: 38ch;
+}
+
+.tsn-name {
+  margin: 0 0 4px 0;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.tsn-role {
+  letter-spacing: 2px;
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+/* Prev/Next controls (optional) */
+.tsn-controls {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.tsn-nav {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  font-size: 24px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background 200ms ease, transform 200ms ease;
+}
+
+.tsn-nav:hover {
+  background: rgba(255, 255, 255, 0.28);
+  transform: translateY(-1px);
+}
+
+.tsn-nav:active {
+  transform: translateY(0);
+}

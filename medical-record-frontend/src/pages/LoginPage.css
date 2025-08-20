@@ -1,0 +1,67 @@
+
+
+.login-container {
+  position: relative;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: none;
+  padding: 0;
+}
+
+.login-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 1;
+  filter: blur(2px) brightness(0.6);
+}
+
+.login-form {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 2.5rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  min-width: 320px;
+  max-width: 90vw;
+  margin: 2rem;
+  backdrop-filter: blur(2px);
+}
+
+.login-form h2 {
+  margin-bottom: 1.5rem;
+  color: #1a365d;
+  text-align: center;
+}
+
+/* Optional: Style form fields and button for clarity */
+.login-form input,
+.login-form button {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.85rem;
+  border-radius: 0.5rem;
+  border: 1px solid #b3d8fd;
+  font-size: 1rem;
+}
+
+.login-form button {
+  background: #3182ce;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.login-form button:hover {
+  background: #2563eb;
+}

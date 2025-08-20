@@ -1,0 +1,254 @@
+.dashboard-container {
+  padding: 20px;
+}
+
+/* ✅ Hero Section */
+.hero-section {
+  position: relative;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.hero-img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.hero-text {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+}
+
+/* ✅ Lab Section */
+.lab-section {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.lab-btn {
+  padding: 10px 15px;
+  background-color: darkblue;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.lab-btn:hover {
+  background-color: #1e874b;
+}
+
+/* ✅ Medical Records Table */
+.records-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.records-table th, .records-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+
+.records-table th {
+  background-color: #f4f4f4;
+  font-weight: 600;
+}
+
+.view-btn, .edit-btn, .delete-btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+}
+
+.view-btn { background: #2f80ed; margin-right: 5px; }
+.edit-btn { background: #f39c12; margin-right: 5px; }
+.delete-btn { background: #e74c3c; }
+
+/* ✅ Modal Styling */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.download-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 15px;
+  background: #2f80ed;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.close-btn {
+  margin-top: 10px;
+  padding: 8px 15px;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.save-btn {
+  background: darkblue;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+
+/* ✅ Floating Chatbot Button */
+.chatbot-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: lightskyblue;
+  border-radius: 50%;
+  width: 65px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+.chatbot-float:hover {
+  transform: scale(1.1);
+}
+
+.chatbot-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+/* ✅ Chat Window */
+.chatbot-window {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 320px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.chatbot-window h4 {
+  background:darkblue;
+  color: white;
+  padding: 12px;
+  margin: 0;
+  border-radius: 12px 12px 0 0;
+  font-size: 16px;
+  text-align: center;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background: #f8f9fa;
+}
+
+.bot-msg {
+  background: #e9f7ef;
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  max-width: 85%;
+}
+
+.user-msg {
+  background: #d1ecf1;
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  max-width: 85%;
+  align-self: flex-end;
+}
+
+.chat-input-container {
+  display: flex;
+  border-top: 1px solid #ccc;
+  padding: 8px;
+}
+
+.chat-input-container input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.chat-input-container button {
+  background: darkblue;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-left: 6px;
+  cursor: pointer;
+}
+
