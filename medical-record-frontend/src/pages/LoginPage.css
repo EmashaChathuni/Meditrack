@@ -1,4 +1,8 @@
-
+.login{
+  font-family: var(--font-family-sans);
+  color: var(--text-primary);
+  line-height: var(--leading-normal);
+}
 
 .login-container {
   position: relative;

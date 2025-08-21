@@ -5,7 +5,7 @@ function HomePage() {
   return (
     <div className="home-page">
 
-    
+
   <section className="hero-section">
     <div className="hero-content">
       <h1 className="hero-title">Welcome to MediTrack</h1>
@@ -25,7 +25,7 @@ function HomePage() {
 
       
 
-       {/* 3. Features Section */}
+       
       <section className="features-section">
         <h2>Key Features</h2>
         <div className="features-grid">
@@ -53,7 +53,7 @@ function HomePage() {
       </section>
 
 
-      {/* 2. About Section */}
+      
       <section id="about" className="about-section">
         <div className="about-text">
           <h2>About MediTrack</h2>
@@ -75,7 +75,9 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Features Section */}
+
+
+      
       <section className="features">
         <h2>Why Choose MedTrack?</h2>
         <div className="feature-list">
