@@ -5,7 +5,7 @@ import axios from "axios";
 
 const API_BASE = import.meta.env?.VITE_API || "http://localhost:5000";
 
-/** Read JWT saved after login: localStorage.setItem('token', token) */
+
 function authHeader() {
   const t = localStorage.getItem("token");
   return t ? { Authorization: `Bearer ${t}` } : {};
@@ -197,14 +197,13 @@ function Dashboard() {
     notes: "",
   });
 
-  // New Lab Report form state (inside modal)
   const [newLabReport, setNewLabReport] = useState({
     reportDate: "",
     notes: "",
     fileUrl: "",
   });
 
-  // ✅ Chatbot state
+ 
   const [showChat, setShowChat] = useState(false);
   const [messages, setMessages] = useState([
     {
@@ -425,7 +424,7 @@ console.log("Sending payload:", payload);
     <div className="dashboard-container">
       {/* HERO */}
       <div className="hero-section">
-        <img src="/images/background.jpg" alt="Medical" className="hero-img" />
+        <img src="/images/dashboard.jpg" alt="Medical" className="hero-img" />
         <div className="hero-text">
           <h1>Keep track of your health journey</h1>
           <p>Upload and view all your medical documents here.</p>

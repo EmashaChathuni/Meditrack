@@ -2,7 +2,8 @@
   padding: 20px;
 }
 
-✅ Hero Section
+
+
 .hero-section {
   position: relative;
   text-align: center;
@@ -11,7 +12,7 @@
 
 .hero-img {
   width: 100%;
-  height: 300px;
+  height: 500px;
   object-fit: cover;
   border-radius: 10px;
 }
@@ -19,13 +20,17 @@
 .hero-text {
   position: absolute;
   top: 30%;
-  left: 50%;
+  left: 30%;
   transform: translateX(-50%);
   color: white;
   text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+  font-size: 1.3rem;
+  font-weight: bold;
+ 
 }
 
-/* ✅ Lab Section */
+
+
 .lab-section {
   display: flex;
   gap: 15px;
@@ -47,7 +52,8 @@
   background-color: #1e874b;
 }
 
-/* ✅ Medical Records Table */
+
+
 .records-table {
   width: 100%;
   border-collapse: collapse;
@@ -80,7 +86,8 @@
 .edit-btn { background: #f39c12; margin-right: 5px; }
 .delete-btn { background: #e74c3c; }
 
-/* ✅ Modal Styling */
+
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -147,7 +154,7 @@
   margin-right: 10px;
 }
 
-/* ✅ Floating Chatbot Button */
+
 .chatbot-float {
   position: fixed;
   bottom: 20px;
@@ -175,7 +182,7 @@
   border-radius: 50%;
 }
 
-/* ✅ Chat Window */
+
 .chatbot-window {
   position: fixed;
   bottom: 90px;
