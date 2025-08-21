@@ -11,22 +11,32 @@ const LoginPage = () => {
 const handleSubmit = async (e) => {
   e.preventDefault();
   try {
-    const res = await fetch('http://localhost:5000/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const res = await fetch("http://localhost:5000/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),
-      credentials: 'include', // <-- This line ensures cookies are sent
+      credentials: "include", // ensures cookies are sent
     });
+
     const data = await res.json();
+
     if (res.ok) {
-      navigate("/dashboard"); // Redirect after successful login
+      // ✅ Save user details and token in localStorage
+      console.log("Login successful:", data);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("token", data.token);
+      navigate("/dashboard");
+
+      // Redirect after successful login
     } else {
-      setError("Invalid credentials");
+      setError(data.error || "Invalid credentials");
     }
-  } catch {
+  } catch (err) {
+    console.error("Login error:", err);
     setError("Login failed. Please try again.");
   }
 };
+
 
 
 

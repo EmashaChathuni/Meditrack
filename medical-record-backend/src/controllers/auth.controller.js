@@ -1,31 +1,38 @@
+// src/controllers/auth.controller.js
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { z } from 'zod';
 import User from '../models/User.js';
-import cookieParser from 'cookie-parser';  // Add cookie-parser for cookie handling
+import cookieParser from 'cookie-parser'; // harmless even if not used directly here
 
 // Zod validation schemas for registration and login
 const registerSchema = z.object({
-  username: z.string().min(3).max(30).regex(/^[a-zA-Z0-9_]+$/, 'Letters, numbers, underscores only'),
+  username: z
+    .string()
+    .min(3)
+    .max(30)
+    .regex(/^[a-zA-Z0-9_]+$/, 'Letters, numbers, underscores only'),
   email: z.string().email(),
   password: z.string().min(8).max(128),
 });
 
-const loginSchema = z.object({
-  username: z.string().min(1).optional(),
-  email: z.string().email().optional(),
-  password: z.string().min(1),
-}).refine(d => d.username || d.email, { message: 'username or email is required' });
+const loginSchema = z
+  .object({
+    username: z.string().min(1).optional(),
+    email: z.string().email().optional(),
+    password: z.string().min(1),
+  })
+  .refine((d) => d.username || d.email, { message: 'username or email is required' });
 
 // Function to set authentication cookie
 function setAuthCookie(res, token) {
   const isProd = process.env.NODE_ENV === 'production';
   res.cookie('access_token', token, {
-    httpOnly: true,              // Prevents JavaScript access to the cookie
-    secure: isProd,              // true in production (requires HTTPS)
-    sameSite: isProd ? 'none' : 'lax',  // Allow cross-origin cookies in production
+    httpOnly: true,
+    secure: isProd, // true in production (requires HTTPS)
+    sameSite: isProd ? 'none' : 'lax', // Allow cross-origin cookies in production
     path: '/',
-    maxAge: 1000 * 60 * 60 * 24 * 7,    // 7 days
+    maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
   });
 }
 
@@ -35,7 +42,10 @@ export async function register(req, res, next) {
     const { username, email, password } = registerSchema.parse(req.body);
 
     // Check for duplicate username or email
-    const existing = await User.findOne({ $or: [{ username: username.toLowerCase() }, { email: email.toLowerCase() }] }).lean();
+    const existing = await User.findOne({
+      $or: [{ username: username.toLowerCase() }, { email: email.toLowerCase() }],
+    }).lean();
+
     if (existing) {
       const field = existing.username === username.toLowerCase() ? 'Username' : 'Email';
       return res.status(409).json({ error: `${field} already in use` });
@@ -57,11 +67,12 @@ export async function register(req, res, next) {
     // Set the token in cookies
     setAuthCookie(res, token);
 
-    // Send user data in the response (without password hash)
+    // Send user data in the response (passwordHash removed by toJSON)
     res.status(201).json({ user });
   } catch (err) {
+    // ✅ Zod v3 uses `issues` (not `errors`)
     if (err instanceof z.ZodError) {
-      const errorMessages = err.errors ? err.errors.map(e => e.message).join(', ') : 'Invalid input';
+      const errorMessages = err.issues?.map((e) => e.message).join(', ') || 'Invalid input';
       return res.status(400).json({ error: errorMessages });
     }
     if (err?.code === 11000) {
@@ -76,7 +87,7 @@ export async function register(req, res, next) {
 export async function login(req, res, next) {
   try {
     const data = loginSchema.parse(req.body);
-    const identifier = data.username ?? data.email;
+
     const query = data.username
       ? { username: data.username.toLowerCase() }
       : { email: data.email.toLowerCase() };
@@ -102,8 +113,11 @@ export async function login(req, res, next) {
     // Return the user and token in the response
     res.json({ user, token });
   } catch (err) {
-    if (err instanceof z.ZodError)
-      return res.status(400).json({ error: err.errors.map(e => e.message).join(', ') });
+    // ✅ Use `issues` here too, and fall back safely
+    if (err instanceof z.ZodError) {
+      const errorMessages = err.issues?.map((e) => e.message).join(', ') || 'Invalid input';
+      return res.status(400).json({ error: errorMessages });
+    }
     next(err);
   }
 }

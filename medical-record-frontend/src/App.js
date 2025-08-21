@@ -7,6 +7,9 @@ import SignupPage from './pages/SignupPage';
 import HomePage from './pages/HomePage';
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
+import HealthTipsPage from './pages/HealthTipsPage';
+import { elements } from 'chart.js';
+
 
 
 function App() {
@@ -19,6 +22,7 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/health-tips" element={<HealthTipsPage />} />
       </Routes>
       <Footer />
     </Router>

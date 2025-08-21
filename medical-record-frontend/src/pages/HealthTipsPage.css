@@ -1,0 +1,71 @@
+/* Health Tips Page Styles */
+.health-tips-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.health-tips-section, .health-news-section {
+  margin-bottom: 40px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.tips-list, .news-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  justify-items: center;
+}
+
+.tip-card, .news-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  width: 100%;
+  max-width: 350px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tip-card h3, .news-card h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #2f80ed;
+  margin-bottom: 10px;
+}
+
+.tip-card p, .news-card p {
+  font-size: 1rem;
+  color: #555;
+}
+
+.tip-link, .news-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #2f80ed;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.tip-link:hover, .news-link:hover {
+  color: #1a5bb8;
+}
+
+@media screen and (max-width: 768px) {
+  .tips-list, .news-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .tips-list, .news-list {
+    grid-template-columns: 1fr;
+  }
+}
